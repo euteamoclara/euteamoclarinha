@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Para Você</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,300;0,400;1,300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+
+    <div id="tela-inicial">
+        <button id="botao-entrar">ENTRAR</button>
+    </div>
+
+    <canvas id="fundo-estrelas"></canvas>
+
+    <audio id="audio-fundo" src="/fotos/musica.mp3" loop></audio>
+
+    <div id="container-notificacao"></div>
+
+    <div id="container-jogo">
+        <h1 class="text-sm md:text-lg font-light uppercase texto-dica mb-6 md:mb-10 text-center px-4">
+            Tenta acertar minha parte favorita em você
+        </h1>
+
+        <div id="tabuleiro"></div>
+
+        <div id="teclado" class="mt-6 md:mt-10">
+            <div class="linha-tecla">
+                <button class="tecla" data-tecla="q">Q</button>
+                <button class="tecla" data-tecla="w">W</button>
+                <button class="tecla" data-tecla="e">E</button>
+                <button class="tecla" data-tecla="r">R</button>
+                <button class="tecla" data-tecla="t">T</button>
+                <button class="tecla" data-tecla="y">Y</button>
+                <button class="tecla" data-tecla="u">U</button>
+                <button class="tecla" data-tecla="i">I</button>
+                <button class="tecla" data-tecla="o">O</button>
+                <button class="tecla" data-tecla="p">P</button>
+            </div>
+            <div class="linha-tecla">
+                <button class="tecla" data-tecla="a">A</button>
+                <button class="tecla" data-tecla="s">S</button>
+                <button class="tecla" data-tecla="d">D</button>
+                <button class="tecla" data-tecla="f">F</button>
+                <button class="tecla" data-tecla="g">G</button>
+                <button class="tecla" data-tecla="h">H</button>
+                <button class="tecla" data-tecla="j">J</button>
+                <button class="tecla" data-tecla="k">K</button>
+                <button class="tecla" data-tecla="l">L</button>
+            </div>
+            <div class="linha-tecla">
+                <button class="tecla tecla-larga" data-tecla="enter">ENVIAR</button>
+                <button class="tecla" data-tecla="z">Z</button>
+                <button class="tecla" data-tecla="x">X</button>
+                <button class="tecla" data-tecla="c">C</button>
+                <button class="tecla" data-tecla="v">V</button>
+                <button class="tecla" data-tecla="b">B</button>
+                <button class="tecla" data-tecla="n">N</button>
+                <button class="tecla" data-tecla="m">M</button>
+                <button class="tecla tecla-larga" data-tecla="backspace">APAGAR</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="tela-escura"></div>
+
+    <div id="container-final">
+        <div class="sessao-final">
+            <img id="imagem-final" src="/fotos/foto.png" alt="É VOCE QUE TEMMMM OS OLHOS TAO BRILHANTESSS">
+        </div>
+        
+        <div class="sessao-final" style="justify-content: flex-start; padding-top: 5vh; padding-bottom: 20vh;">
+            <div id="mensagem-final">
+                <span class="data-final">08/03</span>
+                
+                <p>Esse fim de semana foi especial.<br>
+                Ontem fizemos dois meses juntos e hoje é seu dia.</p>
+
+                <p>Sou fascinado pelo seu olhar.<br>
+                A profundidade dos seus olhos é imensurável, como tentar procurar o fim do universo em sua tamanha majestade.<br>
+                Antes eu sonhava olhando para as estrelas.<br>
+                Hoje, acordado, encontro a mais bela constelação quando olho pra você.</p>
+
+                <p>Amo suas pupilas, sua íris, amo suas pálpebras... Eu te amo.</p>
+
+                <p>Você é minha garota, minha melhor amiga e minha alma gêmea. Você é quem eu sonhei encontrar.</p>
+
+                <p>Em breve, vamos deitar juntos e olhar as estrelas... Mas tenho certeza que você vai roubar o brilho delas de novo, prendendo meu olhar em você como toda vez.</p>
+
+                <p>Feliz dia das mulheres, minha guerreira.<br>
+                Conte sempre com seu melhor amigo pra tudo.</p>
+
+                <p>Eu te amo.</p>
+
+                <p class="assinatura">
+                    De Gabriel,<br>
+                    feito com todo amor e carinho para minha futura esposa, Clara.
+                </p>
+            </div>
+        </div>
+    </div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
