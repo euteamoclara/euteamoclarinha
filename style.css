@@ -1,0 +1,355 @@
+
+        :root {
+            --fundo-cosmico: #000000;
+            --borda-quadrado: rgba(255, 255, 255, 0.2);
+            --fundo-vazio: transparent;
+            --fundo-preenchido: rgba(255, 255, 255, 0.05);
+            --cor-certa: rgba(210, 210, 220, 0.9);
+            --cor-quase: rgba(120, 120, 130, 0.7);
+            --cor-errada: rgba(30, 30, 35, 0.8);
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--fundo-cosmico);
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+            overflow-y: hidden;
+        }
+
+        .permitir-rolagem {
+            overflow-y: auto !important;
+        }
+
+        #tela-inicial {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(15px);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 1.5s ease;
+        }
+
+        #botao-entrar {
+            background-color: transparent;
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 300;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.4s ease;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+        }
+
+        #botao-entrar:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: white;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+
+        #fundo-estrelas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        #container-jogo {
+            position: relative;
+            z-index: 10;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 3s ease, filter 3s ease;
+        }
+
+        .texto-dica {
+            text-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
+            letter-spacing: 0.2em;
+        }
+
+        #tabuleiro {
+            display: grid;
+            grid-template-rows: repeat(6, 1fr);
+            gap: 8px;
+            margin-bottom: 2rem;
+        }
+
+        .linha-tabuleiro {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+        }
+
+        .quadrado {
+            width: 60px;
+            height: 60px;
+            border: 1px solid var(--borda-quadrado);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: 300;
+            text-transform: uppercase;
+            background-color: var(--fundo-vazio);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.02);
+            transition: transform 0.5s ease, background-color 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
+        }
+
+        @media (max-width: 400px) {
+            .quadrado { 
+                width: 45px; 
+                height: 45px; 
+                font-size: 1.25rem; 
+            }
+            #teclado { 
+                transform: scale(0.9); 
+            }
+        }
+
+        /*Tio GEGE ajudou nessa função, quebrei a cabeça nisso! ECA*/
+
+        .quadrado[data-estado="preenchido"] {
+            background-color: var(--fundo-preenchido);
+            border-color: rgba(255, 255, 255, 0.4);
+            animation: aparecerRapido 0.1s ease-in-out;
+        }
+
+        @keyframes aparecerRapido {
+            0% { transform: scale(0.8); opacity: 0; }
+            40% { transform: scale(1.1); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .quadrado.girar-sair { 
+            transform: rotateX(90deg); 
+        }
+        
+        .quadrado.girar-entrar { 
+            transform: rotateX(0deg); 
+        }
+
+        .quadrado[data-estado="certo"] {
+            background-color: var(--cor-certa);
+            border-color: var(--cor-certa);
+            text-shadow: 0 0 5px white;
+            box-shadow: 0 0 15px var(--cor-certa);
+        }
+        
+        .quadrado[data-estado="quase"] {
+            background-color: var(--cor-quase);
+            border-color: var(--cor-quase);
+            box-shadow: 0 0 15px var(--cor-quase);
+        }
+        
+        .quadrado[data-estado="errado"] {
+            background-color: var(--cor-errada);
+            border-color: rgba(255,255,255,0.1);
+        }
+
+        .quadrado.brilho-vitoria {
+            animation: animacaoVitoria 2s ease-in-out forwards;
+        }
+
+        /*Se algm ler isso, saiba: EU ODEIO KEYFRAMES ODEIO LOGICA ODEIO MATEMATICA*/
+
+        @keyframes animacaoVitoria {
+            0% { 
+                box-shadow: 0 0 15px var(--cor-certa); 
+                transform: scale(1); 
+            }
+            50% { 
+                box-shadow: 0 0 30px rgba(255, 255, 255, 0.8), inset 0 0 20px rgba(255,255,255,0.5); 
+                transform: scale(1.05); 
+                border-color: white; 
+                background-color: rgba(255,255,255,0.8); 
+                color: black;
+            }
+            100% { 
+                box-shadow: 0 0 50px rgba(255, 255, 255, 1); 
+                transform: scale(1); 
+                border-color: white; 
+                background-color: white; 
+                color: black; 
+            }
+        }
+
+        #teclado {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            width: 100%;
+            max-width: 550px;
+            padding: 0 10px;
+        }
+        
+        .linha-tecla {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .tecla {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 6px;
+            padding: 18px 0;
+            font-size: 1.1rem;
+            font-weight: 300;
+            cursor: pointer;
+            user-select: none;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+        
+        .tecla:active {
+            transform: scale(0.95);
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .tecla.tecla-larga { 
+            flex: 1.8; 
+            font-size: 0.9rem; 
+        }
+        
+        .tecla[data-estado="certo"] { 
+            background-color: var(--cor-certa); 
+            border-color: var(--cor-certa); 
+        }
+        
+        .tecla[data-estado="quase"] { 
+            background-color: var(--cor-quase); 
+            border-color: var(--cor-quase); 
+        }
+        
+        .tecla[data-estado="errado"] { 
+            background-color: var(--cor-errada); 
+            opacity: 0.5; 
+        }
+
+        #container-final {
+            display: none;
+            position: relative;
+            width: 100%;
+            z-index: 5;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .sessao-final {
+            min-height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #imagem-final {
+            max-width: 90vw;
+            max-height: 80vh;
+            object-fit: contain;
+            mix-blend-mode: screen; 
+            filter: drop-shadow(0 0 25px rgba(255, 255, 255, 0.15));
+        }
+
+        #mensagem-final {
+            text-align: center;
+            font-weight: 300;
+            font-size: 1.15rem;
+            line-height: 1.8;
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+            max-width: 700px;
+            padding: 0 20px;
+        }
+
+        #mensagem-final p { 
+            margin-bottom: 1.5rem; 
+        }
+
+        .data-final {
+            display: inline-block;
+            font-size: 2.2rem;
+            font-weight: 400;
+            margin-bottom: 2rem;
+            color: #ffffff;
+            letter-spacing: 0.1em;
+        }
+
+        .assinatura {
+            margin-top: 3.5rem !important;
+            font-style: italic;
+            font-size: 1rem;
+            font-weight: 200;
+            opacity: 0.8;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding-top: 1.5rem;
+            display: inline-block;
+        }
+        
+        #tela-escura {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000000;
+            z-index: 100;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 5s ease-in-out;
+        }
+
+        #container-notificacao {
+            position: absolute;
+            top: 15%;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 50;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            pointer-events: none;
+            width: 90%; 
+            max-width: 400px;
+        }
+        
+        .notificacao {
+            background-color: rgba(255, 255, 255, 0.95);
+            color: black;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: 400;
+            font-size: 0.95rem;
+            text-align: center;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+        }
+
